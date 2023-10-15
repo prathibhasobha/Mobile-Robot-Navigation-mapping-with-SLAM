@@ -1,0 +1,6 @@
+
+<launch>
+  <node name="simulator_node" pkg="ros-forward-kinematics" type="simulator" output="screen" />
+  <node name="driver_node" pkg="ros-forward-kinematics" type="driver" output="screen" />
+</launch>
+

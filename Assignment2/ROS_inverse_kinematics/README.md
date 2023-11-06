@@ -4,7 +4,7 @@
 Youtube link: https://youtu.be/evzx7DotMmw 
 
 
-** Steps taken:**
+**Steps taken:**
 
 •	**Install ROS**: First, I installed ROS on your system. 
 •	**Created a ROS Workspace**: Created a catkin workspace where you will organize your ROS packages. 
@@ -27,7 +27,7 @@ Youtube link: https://youtu.be/evzx7DotMmw
 
 Now my C++ ROS program is all set to run the code.
 
-** Description of code:**
+ **Description of code:**
 
 Here,I created two separate C++ files: one for the driver and another for the simulator.
 

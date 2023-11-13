@@ -9,7 +9,7 @@ Youtube link: https://youtu.be/evzx7DotMmw
 •	**Install ROS**: First, I installed ROS on your system. 
 •	**Created a ROS Workspace**: Created a catkin workspace where you will organize your ROS packages. 
 
-•	**Created a ROS Package**: Created a ROS package that will contain my C++ program (driver. cpp and simulator. cpp). It was 
+•	**Created a ROS Package**: Created a ROS package that will contain my C++ program (driver2_in_kine. cpp and controller_in_kine. cpp). It was 
                                                      done by using a package named the 'catkin_create_pkg'  command. 
 
 •	**Create Your C++ Program**: Copied my C++ program within the package I just created. I have to place it in the 'src/' directory 

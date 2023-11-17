@@ -81,29 +81,29 @@ This code is a simple differential drive simulator for a robot in a ROS environm
 **Libraries and Constants**
 
 **ROS Headers**: The code includes necessary ROS and other headers.
-Constants: It declares two constants, `PI` and `WHEEL_DIST`, representing the mathematical constant Pi and the distance between the two wheels of the differential drive robot, respectively.
+Constants: It declares two constants,'PI' and 'WHEEL_DIST' , representing the mathematical constant Pi and the distance between the two wheels of the differential drive robot, respectively.
 
  **ROS Publisher**
 The code declares a ROS publisher for the simulated pose of the robot.
 
 **Callback Function:**
- There's a callback function `myCallbackVelCmd` that gets called whenever velocity commands (`geometry_msgs::Twist`) are received. This function computes the new pose of the robot based on the received velocity commands.
+ There's a callback function 'myCallbackVelCmd'  that gets called whenever velocity commands ('geometry_msgs::Twist')  are received. This function computes the new pose of the robot based on the received velocity commands.
 
  **Pose Variables**
- It initializes static variables `x`, `y`, and `th` representing the current position and orientation of the robot.
+ It initializes static variables 'x', 'y' and 'th'representing the current position and orientation of the robot.
 
 **Time Handling**
-The code manages the current and previous time to calculate the time difference (`dt`) between consecutive callbacks.
+The code manages the current and previous time to calculate the time difference ('dt') between consecutive callbacks.
 
  **Differential Drive Kinematics**
  It calculates the speed of the left and right wheels and uses differential drive kinematics to update the robot's pose based on the received velocity commands.
 
  **Straight Line Motion and Circular Motion**
 If the robot is moving straight, it updates the position based on linear velocity.
-Circular Motion (Turning):  If the robot is turning, it calculates the center of rotation (`ICC`), angular velocity (`w`), and updates the position and orientation accordingly.
+Circular Motion (Turning):  If the robot is turning, it calculates the center of rotation , angular velocity, and updates the position and orientation accordingly.
 
  **Pose Message and Publication**
- It creates a `turtlesim::Pose` message with updated position and orientation.
+ It creates a 'turtlesim::Pose' message with updated position and orientation.
 Publish: The updated pose is published using the ROS publisher.
 
 **ROS Initialization:**
@@ -113,10 +113,10 @@ Publish: The updated pose is published using the ROS publisher.
 It enters the ROS spin loop, allowing callbacks to be processed.
 
 **Node Name and Topics**
-The ROS node is named "DiffDrive_simulator," and it subscribes to the "/cmd_vel" topic for velocity commands and publishes the simulated pose on the "/mypose" topic.
+The ROS node is named "DiffDrive_simulator"and it subscribes to the"/cmd_vel"  topic for velocity commands and publishes the simulated pose on the "/mypose" topic.
 
 **Logging**
-The code logs the current pose using `ROS_INFO` statements.
+The code logs the current pose using 'ROS_INFO' statements.
 
 **ROS Spin**
  The code enters the ROS spin loop, where it waits for callbacks to be called.
@@ -133,4 +133,5 @@ A ROS launch file is used to start one or more ROS nodes with specified paramete
 This code essentially simulates the movement of a differential drive robot in response to velocity commands and publishes its simulated pose. The differential drive kinematics are used to update the robot's pose based on the received linear and angular velocities.
 
 **Result:**
+
 ![image](https://github.com/prathibhasobha/ECG711-Assignments/assets/124483075/68229188-8894-4eed-91cf-0aaafec22a70)

@@ -1,137 +1,248 @@
-### **Assignment 1 - ROS – Forward Kinematics of a DDMWR- PRATHIBHA SOBHA**
+### **ASSIGNMENT_4:  PRELIMINARY ROBOT SETUP**
 
 
+**Github link**:https://github.com/prathibhasobha/ECG711-Assignments/blob/main/Assignment_4
 
-**Youtube:**https://youtu.be/kKKwfhIWW8U  
+**Youtube links:**
 
+ **Led_blink**:  https://youtube.com/shorts/Lpelpt4QkIM
 
+**Validating the working:**
+Motor:https://youtube.com/shorts/CgHgy1fG7cI
+IMU:https://youtube.com/shorts/0M10gKvK07o
+Encoder:https://youtube.com/shorts/fHN3GxYBdQQ
 
-**Steps taken**:
+**Calibrate the robot**:https://youtube.com/shorts/CgHgy1fG7cI
 
-•	 **Start by installing ROS**: Begin by installing the ROS software on my system.
+**Lidar and mapping:**
+Echo scan:https://youtube.com/shorts/xQpI41YBHTM
+Laser scan:https://youtube.com/shorts/cyn8fp6hWLs
+Hector scan:https://youtu.be/Uyh9obMMYC0
+ 
+### **LED blink for STM32**
 
-•	 **Set up a ROS Workspace**: Create a catkin workspace to organize your ROS packages.
+STM32CubeIDE is an all-in-one multi-OS development tool, an advanced C/C++ development platform with peripheral configuration, code generation, code compilation and debugging functions for STM32 microcontrollers and microprocessors.
 
-•	 **Create a ROS Package:** Generate a ROS package that will house your C++ program (my_driver.cpp and my_simulator.cpp). 
-            This can be done using the 'catkin_create_pkg' command.
+**Steps Followed**
 
-•	 **Develop Your C++ Program**: Copy your C++ program into the created package. Remember to place it in the 'src/' directory 
-           of your package. Ensure that you include all ROS headers and libraries in your C++ program and link against 'roscpp'.
+•	Download STMCube IDE and STM programmer for Linux.
 
-•	 **Modify CMakeLists.txt:** Open the 'CMakeLists.txt' file located in your packages directory and make changes based on the 
-           codes  name and node creation names.
+•	Open STMCube IDE ,then you need to select a workspace. Then save path according to the actual path.
 
-•	**Build the Package**: Build the package using “catkin_make” in your catkin workspace:
+•	Click File->New->STM32 Project.
+			
+•	Search and select the chip STM32F103RCT6, then click Next in the lower right corner to enter the next step
 
-•	**Source the Workspace**: After building, make sure to source your workspace to access the newly built package and its 
-           executables.
+         ![image](https://github.com/prathibhasobha/ECG711-Assignments/assets/124483075/d23958f9-86ba-418d-b165-27bed0ab4096)
 
-•	**Run the C++ ROS Node**: You can now run your C++ ROS node using ‘rosrun’. 
-            Now my C++ ROS program is all set to run the code.
+•	Enter the project name,  I named it as led_blink take LED and all otheparameters can be defaulted. Then, debug information, click 
+            SYS->Debug under Pinout Configuration and select Serial Wire. Modify the system clock of STM32.The external crystal oscillator 
+             is 8M frequency. 
 
-**Description of code:**
+•	Select RCC->HSE in Pinout Configuration and select Crystal/Ceramic Resonator. The HSE is the external clock, and the LSE is the 
+            internal clock. Using the external clock can be more stable and efficient than the internal clock.
 
-Here,I created two separate C++ files: one for the driver and another for the simulator.
+•	Switch to Clock Configuration to modify the frequency of HCLK to 72, and press Enter to confirm. 
 
-**•	Driver (my_driver.cpp):**
+•	Set the PC13 pin to GPIO_Output, and modify the Label to LED for convenience. 
 
-The provided C++ code is a ROS (Robot Operating System) node that simulates a velocity publisher. It generates random linear and angular velocity commands for a robot and publishes them to the “cmd_vel” topic. This code is useful for testing and development, providing a way to simulate velocity commands for robot movement.
+•	Then press Ctrl+S to save, tick Remember my decision, and click Yes. This will automatically generate the code every time you 
+             save.
 
-**Functionalities used:**
+•	Find the main function in the main.c file, and add the content to control the LED light under while(1). The function is that the LED 
+            light flashes every 200 milliseconds. The code is as follows:
 
-**1.Initialization:**
-     The ROS node is initialized with the name “publish_velocity” .
+       ![image](https://github.com/prathibhasobha/ECG711-Assignments/assets/124483075/bf550141-ea19-43a7-9e08-439b8175e065)
 
-**2. NodeHandle Creation:**
-     A NodeHandle is created to interact with the ROS system.
+•	Add the function of generating HEX files. Click Project->Properties->C/C++ Build->Settings->MCU Post build outputs in turn, 
+            and then check the box before Convert to Intel Hex file(-O ihex). 
 
-**3.Publisher Initialization:**
-    A publisher (‘pub’)is created to send messages of type’geometry
-_msgs::Twist’  to the “cmd_vel”  topic.
+•	Click the hammer in the toolbar to start compiling the project. 
 
-**4. Random Number Generation:**
-     The random number generator is seeded with the current time.
+•	STM32CubeIDE will pop up the Console  and see 0 errors in compila-tion, and 0 warnings means the compilation is successful.
 
-**5. Main Loop:**
-    The main loop generates random linear and angular velocity commands, publishes them, logs the commands, and repeats at a rate of 2 Hz.
+•	Next step is to burn the program, for that open the STM32cube  pro-grammer. In the open file upload the led_blink.hex file.
 
-**6. Velocity Command Generation:**
-     Random values are generated for linear and angular velocities.
+•	Connect the device, Insert one end of the USB data cable into the USB port of the computer, and the other end into the Micro 
+            USB port of the Rosmaster expansion board. 
 
-**7. Publishing:**
-    The generated velocity command is published to the “cmd_vel” topic. 
+•	Hold boot and press Reset and set RTS=1.
 
-**8. Logging:**
-     Information about the sent velocity command is logged to the console.
+•	Click connect on programmer software and click download.
 
-**9. Rate Control:**
-     The loop waits to achieve the specified rate.
-
-This code serves as a simulation for a velocity publisher node and can be adapted for testing robot motion in a ROS environment. 
-
-**Result:**
-
-![image](https://github.com/prathibhasobha/ECG711-Assignments/assets/124483075/b0cb7b0e-2661-40b0-8aae-b2374122d960)
-
-**•	Simulator (my_simulator. cpp)**
-
-
-This code is a simple differential drive simulator for a robot in a ROS environment. Here's a breakdown of the code:
-
-**Libraries and Constants**
-
-**ROS Headers**: The code includes necessary ROS and other headers.
-Constants: It declares two constants,'PI' and 'WHEEL_DIST' , representing the mathematical constant Pi and the distance between the two wheels of the differential drive robot, respectively.
-
- **ROS Publisher**
-The code declares a ROS publisher for the simulated pose of the robot.
-
-**Callback Function:**
- There's a callback function 'myCallbackVelCmd'  that gets called whenever velocity commands ('geometry_msgs::Twist')  are received. This function computes the new pose of the robot based on the received velocity commands.
-
- **Pose Variables**
- It initializes static variables 'x', 'y' and 'th'representing the current position and orientation of the robot.
-
-**Time Handling**
-The code manages the current and previous time to calculate the time difference ('dt') between consecutive callbacks.
-
- **Differential Drive Kinematics**
- It calculates the speed of the left and right wheels and uses differential drive kinematics to update the robot's pose based on the received velocity commands.
-
- **Straight Line Motion and Circular Motion**
-If the robot is moving straight, it updates the position based on linear velocity.
-Circular Motion (Turning):  If the robot is turning, it calculates the center of rotation , angular velocity, and updates the position and orientation accordingly.
-
- **Pose Message and Publication**
- It creates a 'turtlesim::Pose' message with updated position and orientation.
-Publish: The updated pose is published using the ROS publisher.
-
-**ROS Initialization:**
- The `main` function initializes the ROS node and creates a publisher and a subscriber.
-
-**ROS Spin**
-It enters the ROS spin loop, allowing callbacks to be processed.
-
-**Node Name and Topics**
-The ROS node is named "DiffDrive_simulator"and it subscribes to the"/cmd_vel"  topic for velocity commands and publishes the simulated pose on the "/mypose" topic.
-
-**Logging**
-The code logs the current pose using 'ROS_INFO' statements.
-
-**ROS Spin**
- The code enters the ROS spin loop, where it waits for callbacks to be called.
-
-This code essentially simulates the movement of a differential drive robot in response to velocity commands and publishes its simulated pose. The differential drive kinematics are used to update the robot's pose based on the received linear and angular velocities.
+   ![image](https://github.com/prathibhasobha/ECG711-Assignments/assets/124483075/3bb85975-2adf-4a9b-b1cf-6dd50aba7c3c)
 
 **Result:**
 
-![image](https://github.com/prathibhasobha/ECG711-Assignments/assets/124483075/938d880c-e8ac-4608-b053-7264d8cee27f)
+     https://youtube.com/shorts/Lpelpt4QkIM
+  
+    ![image](https://github.com/prathibhasobha/ECG711-Assignments/assets/124483075/5537005a-1535-4ac3-8d38-41afe2358c6e)
 
-**•	Launch (robot.launch)**
 
-A ROS launch file is used to start one or more ROS nodes with specified parameters and configurations.
-This code essentially simulates the movement of a differential drive robot in response to velocity commands and publishes its simulated pose. The differential drive kinematics are used to update the robot's pose based on the received linear and angular velocities.
+**Robot Setup**
 
-**Result:**
+Attaching the images of the Robot that was made by setting up the motor, wheels, jetson nano lidar and ROS controller. The Jetson Nano sends serial port data to the expansion board via the USB port. The expansion board integrates a single chip microcomputer to receive and parse the serial port data, and then processes the specific commands to be executed.
 
-![image](https://github.com/prathibhasobha/ECG711-Assignments/assets/124483075/68229188-8894-4eed-91cf-0aaafec22a70)
+![image](https://github.com/prathibhasobha/ECG711-Assignments/assets/124483075/8ee6d3e5-97c5-44a8-b54b-5befa070eb38)
+
+![image](https://github.com/prathibhasobha/ECG711-Assignments/assets/124483075/143319e6-b757-4828-8558-228acc589cea)
+
+![image](https://github.com/prathibhasobha/ECG711-Assignments/assets/124483075/946477ea-16e0-4445-af54-5e0ed606786f)
+
+**### The working of the ROS-Controller for the motors, encoders, IMU**
+
+**Motor:**	
+
+The motor connecting line needs to be connected to the corresponding motor as shown in the figure below, otherwise it may cause the problem that the pro-gram does not match the phenomenon. Motor 1 corresponds to the motor in the upper left corner of the body, Motor 2 corresponds to the motor in the lower left corner, Motor 3 corresponds to the motor in the upper right corner, and Motor 4 corresponds to the motor in the lower right corner. 
+
+![image](https://github.com/prathibhasobha/ECG711-Assignments/assets/124483075/ac2a6fa4-214e-42ba-a665-e8ff9d43c3a7)
+
+Its working was checked by considering the rosmaster_v3.3.4.hex file and the controlling by considering keyboard.launch file.
+
+![image](https://github.com/prathibhasobha/ECG711-Assignments/assets/124483075/e95dd8b8-349c-4156-bca9-f3130da20c90)
+
+**Youtube link** :https://youtube.com/shorts/CgHgy1fG7cI
+
+**IMU**
+
+An IMU is a sensor device that typically combines multiple sensors to measure and report information about an object's acceleration, angular velocity, and sometimes magnetic field. In the context of robotics and ROS, IMUs are commonly used to provide information about a robot's orientation and motion. It is used for odometry and localization, sensor fusion motion planning, stabilization and control and mapping. The IMU working on the robot is as shown below.
+
+![image](https://github.com/prathibhasobha/ECG711-Assignments/assets/124483075/26359180-60df-4d45-87fc-4ffbf15e24f3)
+
+**YouTube Link** :https://youtube.com/shorts/0M10gKvK07o
+
+**Encoder**
+
+Encoders are essential components in robotics, providing information about the rotation and position of motors or wheels. Some key applications and uses of encoders in this robot are wheel odometry, closed loop control, speed control, mapping and localization, path planning. 
+
+![image](https://github.com/prathibhasobha/ECG711-Assignments/assets/124483075/3035d988-4c21-4f00-bfc2-9067552a6f72)
+
+**YouTube link** :https://youtube.com/shorts/fHN3GxYBdQQ
+
+**Jenson nano with the SD-card image**
+
+The Jetson Nano is designed for AI and deep learning applications. It's capable of running neural networks and is suitable for tasks such as image recognition, object detection, and classification. The Jetson Nano can be employed in autonomous vehicle projects, including drones and small-scale robotic vehicles. It can handle computer vision tasks essential for navigation and obstacle avoidance.
+Downloaded the provided SD-card image and flashed it.
+
+![image](https://github.com/prathibhasobha/ECG711-Assignments/assets/124483075/71130621-d173-411c-b6c6-b8b2c83d89db)
+
+![image](https://github.com/prathibhasobha/ECG711-Assignments/assets/124483075/18260d2b-520b-4547-b54d-7c2cc8983fca)
+
+**Calibrate the robot:**
+
+The mobile dictionary mainly stores the relevant characters of the direction control and also the speed dictionary mainly stores the relevant characters of speed control.
+![image](https://github.com/prathibhasobha/ECG711-Assignments/assets/124483075/d2a28856-8afd-43e6-8dec-4bbf92f4aecb)
+![image](https://github.com/prathibhasobha/ECG711-Assignments/assets/124483075/954d1203-4379-40c8-b2d6-3542ecc49ab5)
+Both the angular velocity and the linear velocity have a limit value, which cannot be increased all the time. When starting, the program will first obtain the speed limit value, and when increasing the speed, it will judge and process the increased value.
+
+**YouTube link:**https://youtube.com/shorts/CgHgy1fG7cI
+
+**Lidar and Mapping** 
+
+It is necessary to declare the [RPLIDAR_TYPE] variable in advance in the [.bashrc] file according to different radar models. Open the [.bashrc] file. modify the radar model directly. After modification, refresh the environment variables.
+**Echo Scan:**
+![image](https://github.com/prathibhasobha/ECG711-Assignments/assets/124483075/68b416c3-924e-4b70-97e8-97c0a735c425)
+**YouTube link:** https://youtube.com/shorts/xQpI41YBHTM
+**Laser scan:**
+![image](https://github.com/prathibhasobha/ECG711-Assignments/assets/124483075/ae04f18c-241a-42b6-9367-674140216f70)
+**YouTube link:** https://youtube.com/shorts/cyn8fp6hWLs
+**Hector scan:**
+![image](https://github.com/prathibhasobha/ECG711-Assignments/assets/124483075/65dae710-70e3-46a5-9828-e8805846f88b)
+**YouTube link** :https://youtu.be/Uyh9obMMYC0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

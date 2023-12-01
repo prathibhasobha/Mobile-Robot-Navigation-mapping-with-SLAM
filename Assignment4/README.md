@@ -124,15 +124,21 @@ Encoders are essential components in robotics, providing information about the r
 The Jetson Nano is designed for AI and deep learning applications. It's capable of running neural networks and is suitable for tasks such as image recognition, object detection, and classification. The Jetson Nano can be employed in autonomous vehicle projects, including drones and small-scale robotic vehicles. It can handle computer vision tasks essential for navigation and obstacle avoidance.
 Downloaded the provided SD-card image and flashed it.
 
+
 ![image](https://github.com/prathibhasobha/ECG711-Assignments/assets/124483075/71130621-d173-411c-b6c6-b8b2c83d89db)
 
 ![image](https://github.com/prathibhasobha/ECG711-Assignments/assets/124483075/18260d2b-520b-4547-b54d-7c2cc8983fca)
 
+
 **Calibrate the robot:**
 
 The mobile dictionary mainly stores the relevant characters of the direction control and also the speed dictionary mainly stores the relevant characters of speed control.
+
 ![image](https://github.com/prathibhasobha/ECG711-Assignments/assets/124483075/d2a28856-8afd-43e6-8dec-4bbf92f4aecb)
+
 ![image](https://github.com/prathibhasobha/ECG711-Assignments/assets/124483075/954d1203-4379-40c8-b2d6-3542ecc49ab5)
+
+
 Both the angular velocity and the linear velocity have a limit value, which cannot be increased all the time. When starting, the program will first obtain the speed limit value, and when increasing the speed, it will judge and process the increased value.
 
 **YouTube link:**https://youtube.com/shorts/CgHgy1fG7cI
@@ -140,12 +146,15 @@ Both the angular velocity and the linear velocity have a limit value, which cann
 **Lidar and Mapping** 
 
 It is necessary to declare the [RPLIDAR_TYPE] variable in advance in the [.bashrc] file according to different radar models. Open the [.bashrc] file. modify the radar model directly. After modification, refresh the environment variables.
+
 **Echo Scan:**
 ![image](https://github.com/prathibhasobha/ECG711-Assignments/assets/124483075/68b416c3-924e-4b70-97e8-97c0a735c425)
 **YouTube link:** https://youtube.com/shorts/xQpI41YBHTM
+
 **Laser scan:**
 ![image](https://github.com/prathibhasobha/ECG711-Assignments/assets/124483075/ae04f18c-241a-42b6-9367-674140216f70)
 **YouTube link:** https://youtube.com/shorts/cyn8fp6hWLs
+
 **Hector scan:**
 ![image](https://github.com/prathibhasobha/ECG711-Assignments/assets/124483075/65dae710-70e3-46a5-9828-e8805846f88b)
 **YouTube link** :https://youtu.be/Uyh9obMMYC0

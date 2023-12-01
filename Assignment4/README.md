@@ -148,15 +148,21 @@ Both the angular velocity and the linear velocity have a limit value, which cann
 It is necessary to declare the [RPLIDAR_TYPE] variable in advance in the [.bashrc] file according to different radar models. Open the [.bashrc] file. modify the radar model directly. After modification, refresh the environment variables.
 
 **Echo Scan:**
+
 ![image](https://github.com/prathibhasobha/ECG711-Assignments/assets/124483075/68b416c3-924e-4b70-97e8-97c0a735c425)
+
 **YouTube link:** https://youtube.com/shorts/xQpI41YBHTM
 
 **Laser scan:**
+
 ![image](https://github.com/prathibhasobha/ECG711-Assignments/assets/124483075/ae04f18c-241a-42b6-9367-674140216f70)
+
 **YouTube link:** https://youtube.com/shorts/cyn8fp6hWLs
 
 **Hector scan:**
+
 ![image](https://github.com/prathibhasobha/ECG711-Assignments/assets/124483075/65dae710-70e3-46a5-9828-e8805846f88b)
+
 **YouTube link** :https://youtu.be/Uyh9obMMYC0
 
 
